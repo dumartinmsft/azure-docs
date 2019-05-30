@@ -3,8 +3,8 @@ title: Configure IP addresses for an Azure network interface | Microsoft Docs
 description: Learn how to add, change, and remove private and public IP addresses for a network interface.
 services: virtual-network
 documentationcenter: na
-author: jimdial
-manager: jeconnoc
+author: KumudD
+manager: twooley
 editor: ''
 tags: azure-resource-manager
 
@@ -15,7 +15,7 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 07/24/2017
-ms.author: jdial
+ms.author: kumud
 ---
 
 # Add, change, or remove IP addresses for an Azure network interface
@@ -59,7 +59,7 @@ You can add as many [private](#private) and [public](#public) [IPv4](#ipv4) addr
 
 |Tool|Command|
 |---|---|
-|CLI|[az network nic ip-config create](/cli/azure/network/nic/ip-config#az_network_nic_ip_config_create)|
+|CLI|[az network nic ip-config create](/cli/azure/network/nic/ip-config)|
 |PowerShell|[Add-AzNetworkInterfaceIpConfig](/powershell/module/az.network/add-aznetworkinterfaceipconfig)|
 
 ## Change IP address settings
@@ -80,7 +80,7 @@ You may need to change the assignment method of an IPv4 address, change the stat
 
 |Tool|Command|
 |---|---|
-|CLI|[az network nic ip-config update](/cli/azure/network/nic/ip-config#az_network_nic_ip_config_update)|
+|CLI|[az network nic ip-config update](/cli/azure/network/nic/ip-config)|
 |PowerShell|[Set-AzNetworkInterfaceIpConfig](/powershell/module/az.network/set-aznetworkinterfaceipconfig)|
 
 ## Remove IP addresses
@@ -96,7 +96,7 @@ You can remove [private](#private) and [public](#public) IP addresses from a net
 
 |Tool|Command|
 |---|---|
-|CLI|[az network nic ip-config delete](/cli/azure/network/nic/ip-config#az_network_nic_ip_config_delete)|
+|CLI|[az network nic ip-config delete](/cli/azure/network/nic/ip-config)|
 |PowerShell|[Remove-AzNetworkInterfaceIpConfig](/powershell/module/az.network/remove-aznetworkinterfaceipconfig)|
 
 ## IP configurations
@@ -171,7 +171,7 @@ Dynamic private IPv4 and IPv6 (optionally) addresses are assigned by default.
 You can (optionally) assign a public or private static IPv4 address to an IP configuration. You cannot assign a static public or private IPv6 address to an IP configuration. To learn more about how Azure assigns static public IPv4 addresses, see [Public IP addresses](virtual-network-public-ip-address.md).
 
 - **Public only**: Azure assigns the address from a range unique to each Azure region. You can download the list of ranges (prefixes) for the Azure [Public](https://www.microsoft.com/download/details.aspx?id=56519), [US government](https://www.microsoft.com/download/details.aspx?id=57063), [China](https://www.microsoft.com/download/details.aspx?id=57062), and [Germany](https://www.microsoft.com/download/details.aspx?id=57064) clouds. The address doesn't change until the public IP address resource it's assigned to is deleted, or the assignment method is changed to dynamic. If the public IP address resource is associated to an IP configuration, it must be dissociated from the IP configuration before changing its assignment method.
-- **Private only**: You select and assign an address from the subnet's address range. The address you assign can be any address within the subnet address range that is not one of the first four addresses in the subnet's address range and is not currently assigned to any other resource in the subnet. Static addresses are only released if a network interface is deleted. If you change the allocation method to static, Azure dynamically assigns the previously assigned static IP address as the dynamic address, even if the address isn't the next available address in the subnet's address range. The address also changes if the network interface is assigned to a different subnet within the same virtual network, but to assign the network interface to a different subnet, you must first change the allocation method from static to dynamic. Once you've assigned the network interface to a different subnet, you can change the allocation method back to static, and assign an IP address from the new subnet's address range.
+- **Private only**: You select and assign an address from the subnet's address range. The address you assign can be any address within the subnet address range that is not one of the first four addresses in the subnet's address range and is not currently assigned to any other resource in the subnet. Static addresses are only released if a network interface is deleted. If you change the allocation method to static, Azure dynamically assigns the previously assigned dynamic IP address as the static address, even if the address isn't the next available address in the subnet's address range. The address also changes if the network interface is assigned to a different subnet within the same virtual network, but to assign the network interface to a different subnet, you must first change the allocation method from static to dynamic. Once you've assigned the network interface to a different subnet, you can change the allocation method back to static, and assign an IP address from the new subnet's address range.
 
 ## IP address versions
 

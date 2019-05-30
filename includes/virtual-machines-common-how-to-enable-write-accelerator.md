@@ -5,7 +5,7 @@
  author: msraiye
  ms.service: virtual-machines
  ms.topic: include
- ms.date: 02/20/2019
+ ms.date: 05/23/2019
  ms.author: raiye
  ms.custom: include file
 ---
@@ -43,6 +43,7 @@ There are limits of Azure Premium Storage VHDs per VM that can be supported by W
 
 | VM SKU | Number of Write Accelerator disks | Write Accelerator Disk IOPS per VM |
 | --- | --- | --- |
+| M208ms_v2, M208s_v2| 8 | 10000 |
 | M128ms, 128s | 16 | 20000 |
 | M64ms, M64ls, M64s | 8 | 10000 |
 | M32ms, M32ls, M32ts, M32s | 4 | 5000 |
@@ -91,7 +92,7 @@ Specify either $true or $false to control support of Azure Write Accelerator wit
 
 Examples of commands could look like:
 
-```PowerShell
+```powershell
 New-AzVMConfig | Set-AzVMOsDisk | Add-AzVMDataDisk -Name "datadisk1" | Add-AzVMDataDisk -Name "logdisk1" -WriteAccelerator | New-AzVM
 
 Get-AzVM | Update-AzVM -OsDiskWriteAccelerator $true
@@ -109,7 +110,7 @@ You can use this script to add a new disk to your VM. The disk created with this
 
 Replace `myVM`, `myWAVMs`, `log001`, size of the disk, and LunID of the disk with values appropriate for your specific deployment.
 
-```PowerShell
+```powershell
 # Specify your VM Name
 $vmName="myVM"
 #Specify your Resource Group
@@ -121,7 +122,7 @@ $lunid=8
 #size
 $size=1023
 #Pulls the VM info for later
-$vm=Get-AzurermVM -ResourceGroupName $rgname -Name $vmname
+$vm=Get-AzVM -ResourceGroupName $rgname -Name $vmname
 #add a new VM data disk
 Add-AzVMDataDisk -CreateOption empty -DiskSizeInGB $size -Name $vmname-$datadiskname -VM $vm -Caching None -WriteAccelerator:$true -lun $lunid
 #Updates the VM with the disk config - does not require a reboot
@@ -132,7 +133,7 @@ Update-AzVM -ResourceGroupName $rgname -VM $vm
 
 You can use this script to enable Write Accelerator on an existing disk. Replace `myVM`, `myWAVMs`, and `test-log001` with values appropriate for your specific deployment. The script adds Write Accelerator to an existing disk where the value for **$newstatus** is set to '$true'. Using the value '$false' will disable Write Accelerator on a given disk.
 
-```PowerShell
+```powershell
 #Specify your VM Name
 $vmName="myVM"
 #Specify your Resource Group
@@ -142,7 +143,7 @@ $datadiskname = "test-log001"
 #new Write Accelerator status ($true for enabled, $false for disabled) 
 $newstatus = $true
 #Pulls the VM info for later
-$vm=Get-AzurermVM -ResourceGroupName $rgname -Name $vmname
+$vm=Get-AzVM -ResourceGroupName $rgname -Name $vmname
 #add a new VM data disk
 Set-AzVMDataDisk -VM $vm -Name $datadiskname -Caching None -WriteAccelerator:$newstatus
 #Updates the VM with the disk config - does not require a reboot

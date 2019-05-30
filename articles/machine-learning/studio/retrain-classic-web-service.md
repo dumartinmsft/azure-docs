@@ -5,9 +5,9 @@ description: Learn how to retrain a model and update a classic web service to us
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: studio
-ms.topic: article
+ms.topic: conceptual
 
-author: peterlu
+author: peterclu
 ms.author: amlstudiodocs
 ms.custom: seodec18, previous-ms.author=yahajiza, previous-author=YasinMSFT
 ms.date: 02/14/2019
@@ -18,7 +18,7 @@ Retraining machine learning models is one way to ensure they stay accurate and b
 
 ## Prerequisites
 
-This article assumes you already have both a retraining experiment and a predictive experiment. These steps are explained in [Retrain and deploy a machine learning model.](retrain-models-programmatically.md) However, instead of deploying your machine learning model as a new web service, you will deploy your predictive experiment as a classic web service.
+This article assumes you already have both a retraining experiment and a predictive experiment. These steps are explained in [Retrain and deploy a machine learning model.](/azure/machine-learning/studio/retrain-machine-learning-model) However, instead of deploying your machine learning model as a new web service, you will deploy your predictive experiment as a classic web service.
      
 ## Add a new endpoint
 
